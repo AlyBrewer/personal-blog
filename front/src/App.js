@@ -5,11 +5,16 @@ function App() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api/hello")
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message));
+    fetch("http://127.0.0.1:5000/")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => console.log(data))
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
-
   return (
     <div>
       <h1>{message}</h1>

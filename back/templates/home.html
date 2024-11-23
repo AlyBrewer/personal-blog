@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alyssa's Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Alyssa's Blog</h1>
+        <p>Your thoughts and ideas, all in one place.</p>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/add">Add New Post</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Recent Posts</h2>
+        {% if posts %}
+        <ul>
+            {% for post in posts %}
+            <li>
+                <a href="{{ url_for('post', post_id=post['id']) }}">{{ post['title'] }}</a>
+                <p><em>by {{ post['author'] }}</em></p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No posts yet. <a href="/add">Add your first post!</a></p>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Alyssa Brewer. All rights reserved.</p>
+    </footer>
+</body>
+</html>
